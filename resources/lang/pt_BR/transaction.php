@@ -16,6 +16,9 @@ return [
     'failed' => 'These credentials do not match our records.',
     'password' => 'The provided password is incorrect.',
     'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
-    'forgot_password' => 'Forgot your password?'
+    'forgot_password' => 'Esqueceu sua senha?',
+    'unregistred' => 'Não possuo conta',
+    'remember' => 'Lembre-me',
+    'transactions' => 'Transações'
 
 ];
