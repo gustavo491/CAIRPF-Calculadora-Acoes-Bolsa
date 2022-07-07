@@ -17,6 +17,11 @@
                     </x-nav-link>
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link :href="route('actives')" :active="request()->is('actives*')">
+                        @lang('active.actives')
+                    </x-nav-link>
+                </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link :href="route('transactions')" :active="request()->is('transactions*')">
                         @lang('transaction.transactions')
                     </x-nav-link>
