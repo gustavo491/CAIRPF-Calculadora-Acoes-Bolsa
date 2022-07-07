@@ -1,3 +1,7 @@
+.row-1 {
+    display: grid;
+    grid-template-columns: 100%;
+}
 .row-2 {
     display: grid;
     grid-template-columns: 50% 50%;
@@ -28,9 +32,6 @@
 }
 .form-itens {
     width: 100%;
-}
-.money {
-    width: 88%
 }
 .pdr {
     padding-right:15px;
@@ -133,4 +134,23 @@ tr:nth-child(even) {
 }
 .form-max {
     width: 100%;
+}
+.select2-selection {
+    border-radius: 0px !important;
+}
+.select2-container {
+    border-radius: 0px !important;
+    width: 100% !important;
+    padding-right: 15px !important;
+}
+.select2-selection--single {
+    height:42px !important;
+    border: 1px solid #6b7280 !important;
+}
+.select2-selection__arrow {
+    top: 9px !important;
+    right: 17px !important;
+}
+.select2-selection__rendered {
+    padding-top: 6px;
 }

@@ -19,7 +19,9 @@ class CreateTransactionsTable extends Migration
             $table->bigInteger('id_user')->unsigned();
             $table->foreign('id_user')->references('id')->on('users')->onDelete('cascade');
             $table->enum('movement', array('sell', 'buy','rent'));
-            $table->string('code');
+            $table->bigInteger('id_active')->unsigned();
+            $table->foreign('id_active')->references('id')->on('actives')->onDelete('cascade');
+            $table->string('broker');
             $table->date('date');
             $table->integer('amount');
             $table->decimal('price', 8, 2);

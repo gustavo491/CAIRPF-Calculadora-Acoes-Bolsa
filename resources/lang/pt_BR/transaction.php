@@ -14,7 +14,7 @@ return [
     */
 
     'transactions' => 'Transações',
-    'movement' => 'Tipo',
+    'movement' => 'Operação',
     'code' => 'Código',
     'date' => 'Data',
     'amount' => 'Quantidade',
@@ -27,4 +27,5 @@ return [
     ],
     'edit_transaction' => 'Editar Transação',
     'add_transaction' => 'Adicionar Transação',
+    'broker' => 'Corretora'
 ];

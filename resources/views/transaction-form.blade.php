@@ -19,7 +19,7 @@
                 <div class="p-6 bg-white border-b border-gray-200">
                     
                     <div>
-                        <form action="{{ route('save-transaction') }}" method="post" class="form-item">
+                        <form action="{{ route($transaction->route, !empty($transaction->uuid) ? $transaction->uuid : '') }}" method="post" class="form-item">
                             @csrf
                             <div class="row-2">
                                 <div class="w-50 pdr">
@@ -30,26 +30,33 @@
                                         <option value="rent" @if( !empty($transaction->movement) && 'rent' == $transaction->movement ) selected @endif>@lang('transaction.movements.rent')</option>
                                     </select>
                                 </div>
+                                <div class="w-50 pdr">
+                                    <label class="form-group" for="broker">@lang('transaction.broker')</label>
+                                    <input class="form-itens" name="broker" type="text" placeholder="@lang('transaction.broker')" value="{{ !empty($transaction->broker)? $transaction->broker : '' }}">
+                                </div>
+                               
+                            </div>
+                            <div class="row-2">
                                 <div class="w-50">
                                     <label class="form-group" for="select">@lang('transaction.code')</label>
-                                    <select class="form-itens select2" name="code" class="meuselect">
+                                    <select class="form-itens select2" name="id_active">
                                         <option>@lang('form.select_option')</option>
                                         @foreach ($actives as $active)
-                                            <option value="{{ $active->code }}" @if( !empty($transaction->code) && $active->code == $transaction->code  ) selected @endif>{{ $active->code }} - {{ $active->name }}</option>
+                                            <option value="{{ $active->id }}" @if( !empty($transaction->id) && $active->id == $transaction->id  ) selected @endif>{{ $active->code }} - {{ $active->name }}</option>
                                         @endforeach
                                     </select>
                                 </div>
-                            </div>
-                            <div class="row-3">
                                 <div class="w-50 pdr">
                                     <label class="form-group" for="date">@lang('transaction.date')</label>
                                     <input class="form-itens" type="date" name="date" value="{{ ( !empty($transaction->date) ) ? $transaction->date : '' }}">
                                 </div>
+                            </div>
+                            <div class="row-2">
                                 <div class="w-50 pdr">
                                     <label class="form-group" for="amount">@lang('transaction.amount')</label>
                                     <input class="form-itens" name="amount" type="number" placeholder="000" value="{{ !empty($transaction->amount)? $transaction->amount : '' }}">
                                 </div>
-                                <div class="w-50">
+                                <div class="w-50 pdr">
                                     <label class="form-group" for="price">@lang('transaction.price')</label>
                                     <input type="text" class="money form-itens" name="price" placeholder="R$ 0,00" value="{{ !empty($transaction->price)? str_replace('.',',', $transaction->price) : '' }}">
                                 </div>

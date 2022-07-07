@@ -1,7 +1,4 @@
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/r/dt/dt-1.10.9/datatables.min.css"/>
-<script type="text/javascript" src="https://cdn.datatables.net/r/dt/dt-1.10.9/datatables.min.js"></script>
-<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
+<x-table/>
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
@@ -17,7 +14,9 @@
                         <h1 style="font-size:24px;font-weight:bold;">@lang('transaction.transactions')</h1>
                     </div>
                     <div>
-                        <a class="bg-light" href="{{ route('import-transaction') }}" > <i class="fas fa-cloud-upload-alt"></i> @lang('form.import')</a>
+                        <input style="display: none;" class="bg-light" type="file" id="myfile" name="myfile">
+                        <a class="bg-light" onclick="teste();"> <i class="fas fa-cloud-upload-alt"></i> @lang('form.import')</a>
+                        {{-- $('#myfile').trigger('click'); --}}
                         <a class="bg-success" href="{{ route('add-transaction') }}" > <i class="fas fa-plus-circle"></i> @lang('form.new')</a>
                     </div>
                 </div>
@@ -47,7 +46,7 @@
                                     <div class="row-2" style="font-size:20px; text-align:center;">
                                         <a href="{{ route('edit-transaction' , $transaction->uuid) }}"><i class="fas fa-edit txt-success"></i></a>
 
-                                        <form id="delete_student" action="{{ route('destroy-transaction' , $transaction->uuid) }}" method="post" style="width:22px;">
+                                        <form id="delete_student" action="{{ route('destroy-transaction', $transaction->uuid) }}" method="post" style="width:22px;">
                                             @csrf
                                             <button type="submit" class="show_confirm" data-toggle="tooltip" title='Delete'><i class="fas fa-trash txt-error"></i></button>
                                         </form>
@@ -69,6 +68,7 @@
             </div>
         </div>
     </div>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
   
     <script>
         $(document).ready(function() {
@@ -94,6 +94,46 @@
                 }
             });
         });
+
+        function teste(){
+            Swal.fire({
+                title:  'Submit your Github username',
+                html:   `<input type='file' id="file" name='file' class="form-control">`,
+                confirmButtonText: 'Sign in',
+                focusConfirm: false,
+            }).then((result) => {
+                var CSRF_TOKEN = document.querySelector('meta[name="csrf-token"]').getAttribute("content");
+                var files = $('#file')[0].files;
+                var fd = new FormData();
+                fd.append('file',files[0]);
+                fd.append('_token', CSRF_TOKEN);
+
+                $.ajax({
+                    type:'POST',
+                    url: "{{ route('import-transactions') }}",
+                    data: fd,
+                    cache:false,
+                    contentType: false,
+                    processData: false,
+                    success: (data) => {
+                        if (data.error == 'true') {
+                            Swal.fire({
+                                icon: 'error',
+                                text: data.msg,
+                            })
+                        } else {
+                            Swal.fire({
+                                icon: 'success',
+                                text: data.msg,
+                            })
+                        }
+                    },
+                    error: function(data){
+                        console.log(data);
+                    }
+                });
+            });
+        }
     </script>
 
 @if(session('message'))
