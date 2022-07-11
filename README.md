@@ -11,6 +11,14 @@
 
 Desenvolvido para calcular os dados a serem preenchidos com relaçao as ações no IRPF (imposto de renda para pessoas físicas) de acordo com as transações cadastradas na B3.
 
+## Funcionalidades
+
+- Login/Cadastro/Autenticação. ✅
+- Importar transações via arquivo csv direto da B3. ✅
+- Importar ativos via arquivo csv. ✅
+- Emissão de relatório PDF.
+- Visualizar preview de relatório.
+
 ## About Laravel
 
 Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
